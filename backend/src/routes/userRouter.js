@@ -1,12 +1,9 @@
-// src/routes/userRouter.js (or .ts)
 import { Router } from 'express';
-import { isLoggedin } from '../middlewares/authMiddleware';
+import {getUserDetails} from '../controllers/userController.js';
+import { isLoggedIn } from '../middlewares/authMiddleware.js'; 
 
-
-const userRouter = Express.Router();
-
-userRouter.get("/profile/me",isLoggedin,getUserProfile)
-
-
+const userRouter = Router();
+userRouter.get('/me', isLoggedIn, getUserDetails);
 
 export default userRouter;
+
