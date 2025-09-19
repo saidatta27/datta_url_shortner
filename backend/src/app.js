@@ -42,5 +42,4 @@ app.get("/*name", (req, res) => { res.sendFile(path.join(__dirname, "../../front
 
 app.listen(config.PORT, () => console.log(`Server on PORT: ${config.PORT}`));
 
-
-#npm run built for dist file (in frontend)
+// npm run built for dist file (in frontend)
