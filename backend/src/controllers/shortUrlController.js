@@ -80,3 +80,17 @@ export const getLongUrl = async (req, res) => {
  }
 };
 
+
+export const getUserUrls = async (req, res) => {
+   try {
+   // Find all URLs for the current logged-in user
+    const userId = req.user.id;
+ // Assumes your model’s field is 'userId'
+ const urls = await ShortURL.find({ userId }).sort({ createdAt: -1 });
+ res.json(urls);
+ } catch (err) {
+ res.status(500).json({ message: "Failed to get URLs." });
+ }
+};
+
+

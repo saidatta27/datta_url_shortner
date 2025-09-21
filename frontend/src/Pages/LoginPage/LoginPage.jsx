@@ -1,9 +1,4 @@
-import {
-  Card,
-  Center,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Card, Center, Stack, Text } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { GoogleLogin } from "@react-oauth/google";
 import { showNotification } from "@mantine/notifications";
@@ -19,19 +14,19 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
 
-  const googleResponse = async (res) => {
+  const handleGoogleResponse = async (res) => {
     try {
       const token = res.credential;
-
       if (!token) {
         showNotification({
           title: "Error",
-          message: "Invalid Response From Google",
+          message: "Invalid response from Google.",
           color: "red",
         });
         return;
       }
 
+      // Send token to your backend for validation and JWT generation
       const response = await service.post(GOOGLE_AUTH_LOGIN, { token });
       const data = response.data;
 
@@ -44,16 +39,17 @@ export default function LoginPage() {
           isLoggedIn: true,
         })
       );
+
       showNotification({
         title: "Success",
-        message: "Welcome! Login Successfully.",
+        message: "Welcome! Login successful.",
         color: "green",
       });
       navigate("/");
     } catch (error) {
       showNotification({
         title: "Error",
-        message: error.response?.data?.message ?? "Some Error Occurred!",
+        message: error.response?.data?.message ?? "Some error occurred!",
         color: "red",
       });
       console.error("Google login error:", error);
@@ -92,7 +88,7 @@ export default function LoginPage() {
           <Text c="white" my="sm" size="lg">
             Login to{" "}
             <Text component="span" fw={700} c="white">
-              Being Zero 
+              Being Zero
             </Text>
           </Text>
           <Stack align="center" spacing="lg">
@@ -100,7 +96,7 @@ export default function LoginPage() {
               width={250}
               theme="filled_black"
               useOneTap={true}
-              onSuccess={googleResponse}
+              onSuccess={handleGoogleResponse}
             />
           </Stack>
         </Card>

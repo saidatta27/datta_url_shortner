@@ -2,11 +2,7 @@ import { Avatar, Button, Card, Group, Text } from "@mantine/core";
 import classes from "./UserCardImage.module.css";
 
 export function UserCardImage({ user }) {
-  const stats = [
-    { value: "34K", label: "Followers" },
-    { value: "187", label: "Follows" },
-    { value: "1.6K", label: "Posts" },
-  ];
+  
 
   const items = stats.map((stat) => (
     <div key={stat.label}>
